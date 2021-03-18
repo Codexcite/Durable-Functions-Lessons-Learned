@@ -24,7 +24,7 @@ namespace Codexcite.DurableFunctions.Examples.EntityOrchestration
 			var storageEntityProxy = context.CreateEntityProxy<IStorageEntity>(storageEntityId);
 			
 			// here we can call the method that returns a result
-			var previousUpdate = storageEntityProxy.GetLastUpdated();
+			var previousUpdate = await storageEntityProxy.GetLastUpdated();
 			outputs.Add($"Previous update on {previousUpdate}");
 
 			// ensure no one updates the person while we operate on it
@@ -46,8 +46,8 @@ namespace Codexcite.DurableFunctions.Examples.EntityOrchestration
 					outputs.Add("Added new person");
 				}
 
-				storageEntityProxy.NotifyUpdated(context.CurrentUtcDateTime);
 			}
+			storageEntityProxy.NotifyUpdated(context.CurrentUtcDateTime);
 
 			return outputs;
 		}

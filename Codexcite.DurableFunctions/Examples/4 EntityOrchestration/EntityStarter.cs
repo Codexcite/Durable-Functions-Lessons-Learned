@@ -33,7 +33,7 @@ namespace Codexcite.DurableFunctions.Examples.EntityOrchestration
 
 			string instanceId = await starter.StartNewAsync(nameof(EntityOrchestrator), person); 
 
-			_log.Exit(LogEventLevel.Information, returnValue: instanceId, message: "Starting {instanceId}");
+			_log.Exit(LogEventLevel.Information, returnValue: instanceId, message: $"Starting {instanceId}");
 
 			return starter.CreateCheckStatusResponse(req, instanceId);
 		}

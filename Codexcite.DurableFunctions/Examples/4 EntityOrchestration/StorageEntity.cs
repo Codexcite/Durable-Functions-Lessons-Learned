@@ -10,7 +10,7 @@ namespace Codexcite.DurableFunctions.Examples.EntityOrchestration
 	public interface IStorageEntity
 	{
 		public void NotifyUpdated(DateTime updateDateTime);
-		public DateTime? GetLastUpdated();
+		public Task<DateTime?> GetLastUpdated();
 	}
 	public class StorageEntity : IStorageEntity
 	{
@@ -29,6 +29,6 @@ namespace Codexcite.DurableFunctions.Examples.EntityOrchestration
 			LastUpdated = updateDateTime;
 		}
 
-		public DateTime? GetLastUpdated() => LastUpdated;
+		public Task<DateTime?> GetLastUpdated() => Task.FromResult(LastUpdated);
 	}
 }

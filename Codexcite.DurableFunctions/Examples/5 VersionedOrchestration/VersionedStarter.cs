@@ -24,7 +24,7 @@ namespace Codexcite.DurableFunctions.Examples.VersionedOrchestration
 		{
 			string instanceId = await starter.StartNewAsync(_settings.VersionOrchestrator, null); // using configured options
 
-			_log.Exit(LogEventLevel.Information, returnValue: instanceId, message: "Starting {instanceId}");
+			_log.Exit(LogEventLevel.Information, returnValue: instanceId, message: $"Starting {instanceId}");
 
 			return starter.CreateCheckStatusResponse(req, instanceId);
 		}
