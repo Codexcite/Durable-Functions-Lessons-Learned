@@ -9,5 +9,6 @@ Esta presentación se dirige a desarrolladores con o sin experiencia en Azure / 
 - que son Durable Functions y que tipos de sistemas los pueden aprovechar 
 - revisión de los básicos del desarrollo de Durable Functions 
 - descubrimientos hechos durante el desarrollo de una aplicación de la vida real utilizando Durable Functions
+
 Al final de la presentación, los asistentes tendrán un buen entendimiento acerca de que son los Durable Functions, cuando utilizarlos y de los detalles de implementación que se deberían realizar o evitar durante el desarrollo.
 
