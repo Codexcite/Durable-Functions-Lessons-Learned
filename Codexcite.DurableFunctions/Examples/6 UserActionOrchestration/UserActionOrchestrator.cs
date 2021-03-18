@@ -13,18 +13,25 @@ namespace Codexcite.DurableFunctions.Examples.UserActionOrchestration
 	public class UserActionOrchestrator : BaseLogged
 	{
 		private const string EventNameApproved = "APPROVE";
-		private readonly TimeSpan _timeToWait = TimeSpan.FromMinutes(3);
-		private readonly RetryOptions _retryOptions = new RetryOptions(TimeSpan.FromSeconds(1), 5)
-																													{
-																														BackoffCoefficient = 5, MaxRetryInterval = TimeSpan.FromSeconds(1),
-																														Handle = HandleRetry
-																													};
+		private readonly TimeSpan _timeToWait = TimeSpan.FromSeconds(30);
+		private readonly RetryOptions _retryOptions;
 
-		private static bool HandleRetry(Exception exception)
+		public UserActionOrchestrator()
 		{
+			_retryOptions = new RetryOptions(TimeSpan.FromSeconds(1), 10)
+										{
+											BackoffCoefficient = 2, MaxRetryInterval = TimeSpan.FromSeconds(1),
+											Handle = HandleRetry
+										};
+		}
+
+		private bool HandleRetry(Exception exception) // just to demonstrate retry functionality
+		{
+			//_log.Exception(LogEventLevel.Error, exception: exception, message: "Handling retry");
 			if (exception.InnerException is InfoException infoException) // we get a FunctionFailedException
-				return infoException.Info % 2 == 0; // just to demonstrate retry functionality
-			return false;
+				_log.Exception(LogEventLevel.Error, exception: infoException, message: $"Handling retry info {infoException.Info}");
+				
+			return true;
 		}
 
 		[FunctionName(nameof(UserActionOrchestrator))]

@@ -13,7 +13,7 @@ namespace Codexcite.DurableFunctions.Examples.UserActionOrchestration
 	{
 		[FunctionName(nameof(UserActionStarter))]
 		public async Task<HttpResponseMessage> HttpStart(
-			[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "ParameterStarter/{phone}")] HttpRequestMessage req,
+			[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "UserActionStarter/{phone}")] HttpRequestMessage req,
 			string phone,
 			[DurableClient] IDurableOrchestrationClient starter)
 		{

@@ -12,16 +12,16 @@ using Serilog.Events;
 
 namespace Codexcite.DurableFunctions.Examples.UserActionOrchestration
 {
-	public class ReceiveMessageActivity : BaseLogged
+	public class ReceiveMessageClient : BaseLogged
 	{
 		protected ITimeService TimeService { get; }
 
-		public ReceiveMessageActivity(ITimeService timeService)
+		public ReceiveMessageClient(ITimeService timeService)
 		{
 			TimeService = timeService;
 		}
 
-		[FunctionName(nameof(ReceiveMessageActivity))]
+		[FunctionName(nameof(ReceiveMessage))]
 		public async Task<HttpResponseMessage> ReceiveMessage(
 			[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "ReceiveMessage/{phone}/{message}")] HttpRequestMessage req,
 			string phone, string message,

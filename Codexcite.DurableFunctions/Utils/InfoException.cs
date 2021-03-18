@@ -13,5 +13,9 @@ namespace Codexcite.DurableFunctions.Utils
 
 		public int Info { get; set; }
 
+		public InfoException()
+		{
+			
+		}
 	}
 }

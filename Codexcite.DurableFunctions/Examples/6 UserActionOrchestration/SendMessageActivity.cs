@@ -10,15 +10,21 @@ namespace Codexcite.DurableFunctions.Examples.UserActionOrchestration
 	public class SendMessageActivity : BaseLogged
 	{
 		// Changed to member function instead of static function
-
+		private static int CallCount = 0;
 		[FunctionName(nameof(SendMessageActivity))]
 		public string SayHello([ActivityTrigger] string phone) // Logger now comes from DI
 		{
-			var random = new Random().Next(100);
-			if (random % 3 == 0)
-				throw new InfoException(random, "Random failure"); // just to demonstrate retry functionality
+			CallCount += 1;
+			_log.Enter(LogEventLevel.Information, message: $"Sending message count:{CallCount}");
+			if (CallCount % 3 != 0)
+			{
+				var exception = new InfoException(CallCount, "Random failure");
+				_log.Exception(LogEventLevel.Error, exception: exception, message: "Fired random failure");
+				throw exception; // just to demonstrate retry functionality
+			}
+		
 
-			_log.Trace(LogEventLevel.Information, message: $"Sending message to {phone}.");
+			_log.Exit(LogEventLevel.Information, message: $"Sending message to {phone}.");
 			return $"Sent message to {phone}!";
 		}
 

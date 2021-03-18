@@ -11,7 +11,7 @@ namespace Codexcite.DurableFunctions.Examples.EntityOrchestration
 	{
 		internal const string DatabaseName = "ExampleDb";
 		internal const string ContainerName = "People";
-		internal const string ConnectionStringName = "ExampleConnection";
+		internal const string ConnectionStringName = "CosmosDBConnection";
 	}
 	public class StorageActivity : BaseLogged
 	{

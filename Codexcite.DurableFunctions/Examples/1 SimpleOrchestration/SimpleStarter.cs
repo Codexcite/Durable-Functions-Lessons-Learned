@@ -20,7 +20,7 @@ namespace Codexcite.DurableFunctions.Examples.SimpleOrchestration
 		{
 			string instanceId = await starter.StartNewAsync(nameof(SimpleOrchestrator), null); // using "nameof()" instead of magic strings
 
-			_log.Exit(LogEventLevel.Information, returnValue: instanceId, message: "Starting {instanceId}");
+			_log.Exit(LogEventLevel.Information, returnValue: instanceId, message: $"Starting {instanceId}");
 
 			return starter.CreateCheckStatusResponse(req, instanceId);
 		}
